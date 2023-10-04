@@ -13,7 +13,7 @@ const createNewUser = async (email, password, username) => {
     const connection = await mysql.createConnection({ host: 'localhost', user: 'root', database: 'jwt', Promise: bluebird });
 
     try {
-        const [rows, fields] = await connection.execute('insert into users(email,password,username) values (?,?,?)', [email, hashPass, username]);
+        const [rows, fields] = await connection.execute('insert into user(email,password,username) values (?,?,?)', [email, hashPass, username]);
     } catch (error) {
         console.log(error);
     }
@@ -22,7 +22,7 @@ const createNewUser = async (email, password, username) => {
 const getUserList = async () => {
     const connection = await mysql.createConnection({ host: 'localhost', user: 'root', database: 'jwt', Promise: bluebird });
     try {
-        const [rows, fields] = await connection.execute('select * from users');
+        const [rows, fields] = await connection.execute('select * from user');
         return rows;
     } catch (error) {
         console.log(error);
@@ -32,7 +32,7 @@ const getUserList = async () => {
 const deleteUser = async (id) => {
     const connection = await mysql.createConnection({ host: 'localhost', user: 'root', database: 'jwt', Promise: bluebird });
     try {
-        const [rows, fields] = await connection.execute('delete from users where id=?', [id]);
+        const [rows, fields] = await connection.execute('delete from user where id=?', [id]);
         return rows;
     } catch (error) {
         console.log(error);
@@ -42,7 +42,7 @@ const deleteUser = async (id) => {
 const getUserById = async (id) => {
     const connection = await mysql.createConnection({ host: 'localhost', user: 'root', database: 'jwt', Promise: bluebird });
     try {
-        const [rows, fields] = await connection.execute('select * from users where id=?', [id]);
+        const [rows, fields] = await connection.execute('select * from user where id=?', [id]);
         return rows;
     } catch (error) {
         console.log(error);
@@ -52,7 +52,7 @@ const getUserById = async (id) => {
 const updateUserInfor = async (id, email, username) => {
     const connection = await mysql.createConnection({ host: 'localhost', user: 'root', database: 'jwt', Promise: bluebird });
     try {
-        const [rows, fields] = await connection.execute('update users set email = ?,  username = ? where id = ?', [email, username, id]);
+        const [rows, fields] = await connection.execute('update user set email = ?,  username = ? where id = ?', [email, username, id]);
         return rows;
     } catch (error) {
         console.log(error);
